@@ -1,5 +1,4 @@
 use crate::tokens::{Expr, Operator, UnOperator};
-use crate::tokens::Expr::LitInteger;
 
 pub fn evaluate(expr: Expr) -> Result<i32, String> {
 
@@ -21,7 +20,6 @@ pub fn evaluate(expr: Expr) -> Result<i32, String> {
             match operator {
                 UnOperator::Negation => {Ok(-evaluate(*value)?)},
                 UnOperator::Abs => {Ok(evaluate(*value)?.abs())}
-                _ => {Err("invalid unary operator".to_string())}
             }
 
         },

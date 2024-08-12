@@ -3,8 +3,6 @@ mod parser;
 mod evaluator;
 mod tokens;
 
-use std::io;
-use std::io::{stdin, Error, Write};
 use scanner::scan;
 
 use parser::parse_exp;
@@ -23,7 +21,7 @@ fn main() -> Result<(), String> {
 
     println!("ast: {:?}", ast);
 
-    if tokens.len() > 0 {Err("parser finished early".to_string())} else {Ok(())};
+    if tokens.len() > 0 { Err("parser finished early".to_string()) } else { Ok(()) }?;
 
     let result = evaluate(ast)?;
 

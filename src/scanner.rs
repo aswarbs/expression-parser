@@ -1,14 +1,14 @@
 use std::str::Chars;
 use itertools::Itertools;
 // tokeniser
-use super::tokens::{Token, UnOperator};
+use super::tokens::Token;
 use super::tokens::Operator;
 
 pub fn scan(input: String) -> Vec<Token> {
 
     println!("scanning {}", input);
 
-    let mut chars = &mut input.chars();
+    let chars = &mut input.chars();
 
     let mut tokens = Vec::new();
 

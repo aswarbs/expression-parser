@@ -1,7 +1,5 @@
-use itertools::PeekingNext;
 use crate::tokens::Expr;
 use crate::tokens::Expr::UnOp;
-use crate::tokens::Operator::Plus;
 use super::tokens::{Token, Operator, UnOperator};
 
 
@@ -52,12 +50,12 @@ fn parse_term(tokens:&mut Vec<Token>) -> Result<Expr, String> {
     // term ::= int | - term | ( exp )
 
     match tokens.first() {
-        Some(Token::IntLiteral(_)) => { if let (Token::IntLiteral(i)) = tokens.remove(0) {Ok(Expr::LitInteger(i))} else {Err("expecting integer".to_string())} },
+        Some(Token::IntLiteral(_)) => { if let Token::IntLiteral(i) = tokens.remove(0) {Ok(Expr::LitInteger(i))} else {Err("expecting integer".to_string())} },
 
         Some(Token::Oper(Operator::Minus)) =>
             {
                 tokens.remove(0); // pop the terminal (-)
-                Ok(Expr::UnOp(UnOperator::Negation, Box::from(parse_exp(tokens)?)))
+                Ok(UnOp(UnOperator::Negation, Box::from(parse_exp(tokens)?)))
             },
 
         Some(Token::OpenPar) =>
