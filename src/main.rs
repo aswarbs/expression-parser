@@ -13,7 +13,7 @@ use evaluator::evaluate;
 
 fn main() -> Result<(), String> {
 
-    let line = "1 + 2 * 3".to_string();
+    let line = "|-10 * 2|".to_string();
 
     let mut tokens = scan(line);
 
