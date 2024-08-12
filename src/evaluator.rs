@@ -1,7 +1,7 @@
 use crate::tokens::Expr;
 use crate::tokens::TokenOperator::{Minus, Plus, Times, Divide, Mod, Negation, Abs};
 
-pub fn direct_evaluate(expr: Expr) -> Result<i32, String> {
+pub fn direct_evaluate(expr: Expr) ->  Result<i32, String> {
 
     match expr {
 

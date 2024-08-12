@@ -7,7 +7,6 @@ pub fn ast_to_tam(ast: Expr) ->  Vec<TAMInst> {
         Expr::BinOp(operator, left, right) => ast_to_tam(*left).into_iter().chain(ast_to_tam(*right)).chain(std::iter::once(op_to_taminst(operator))).collect(),
         Expr::UnOp(operator, value) => ast_to_tam(*value).into_iter().chain(std::iter::once(op_to_taminst(operator))).collect(),
     }
-
 }
 
 fn op_to_taminst(operator: TokenOperator) -> TAMInst {

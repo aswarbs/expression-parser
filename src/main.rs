@@ -3,19 +3,22 @@ mod parser;
 mod evaluator;
 mod tokens;
 mod assembler;
+mod vm;
 
 use scanner::scan;
 
 use parser::parse_exp;
 
 use evaluator::direct_evaluate;
+use crate::assembler::ast_to_tam;
+use crate::vm::exec_tam;
 
 fn main() -> Result<(), String> {
 
 
     // my negation has the wrong precedence
 
-    let line = "|-5 + 2| - (1 * 3)".to_string();
+    let line = "3 * (7 - 5)".to_string();
 
     let mut tokens = scan(line);
 
@@ -27,11 +30,27 @@ fn main() -> Result<(), String> {
 
     if tokens.len() > 0 { Err("parser finished early".to_string()) } else { Ok(()) }?;
 
-    //let assembled_code = ast_to_tam(ast);
+    let evaluate_with_tam = true;
 
-    let assembled_code = direct_evaluate(ast);
+    if evaluate_with_tam {
 
-    println!("{:?}", assembled_code);
+        let assembled_code = ast_to_tam(ast);
+
+        println!("{:?}", assembled_code);
+
+        let mut stack = Vec::new();
+
+        let result = exec_tam(&mut stack, assembled_code);
+        println!("{:?}", result);
+
+    }
+    else {
+        let result = direct_evaluate(ast);
+        println!("{:?}", result);
+    }
+
+
+
 
     Ok(())
 
