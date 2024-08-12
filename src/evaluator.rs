@@ -1,16 +1,17 @@
-use crate::tokens::{Expr, Operator, UnOperator};
+use crate::tokens::Expr;
+use crate::tokens::TokenOperator::{Minus, Plus, Times, Divide, Mod, Negation, Abs};
 
-pub fn evaluate(expr: Expr) -> Result<i32, String> {
+pub fn direct_evaluate(expr: Expr) -> Result<i32, String> {
 
     match expr {
 
         Expr::BinOp(operator, left, right) => {
             match operator {
-                Operator::Plus => {Ok(evaluate(*left)? + evaluate(*right)?)},
-                Operator::Minus => {Ok(evaluate(*left)? - evaluate(*right)?)},
-                Operator::Times => {Ok(evaluate(*left)? * evaluate(*right)?)},
-                Operator::Divide => {Ok(evaluate(*left)? / evaluate(*right)?)},
-                Operator::Mod => {Ok(evaluate(*left)? % evaluate(*right)?)},
+                Plus=> {Ok(direct_evaluate(*left)? + direct_evaluate(*right)?)},
+                Minus => {Ok(direct_evaluate(*left)? - direct_evaluate(*right)?)},
+                Times => {Ok(direct_evaluate(*left)? * direct_evaluate(*right)?)},
+                Divide => {Ok(direct_evaluate(*left)? / direct_evaluate(*right)?)},
+                Mod => {Ok(direct_evaluate(*left)? % direct_evaluate(*right)?)},
                 _ => Err("invalid operator".to_string())
             }
         },
@@ -18,8 +19,9 @@ pub fn evaluate(expr: Expr) -> Result<i32, String> {
         Expr::UnOp(operator, value) => {
 
             match operator {
-                UnOperator::Negation => {Ok(-evaluate(*value)?)},
-                UnOperator::Abs => {Ok(evaluate(*value)?.abs())}
+                Negation => {Ok(-direct_evaluate(*value)?)},
+                Abs => {Ok(direct_evaluate(*value)?.abs())}
+                _ => Err("invalid unary operator".to_string())
             }
 
         },
@@ -31,3 +33,4 @@ pub fn evaluate(expr: Expr) -> Result<i32, String> {
     }
 
 }
+

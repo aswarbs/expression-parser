@@ -2,7 +2,7 @@ use std::str::Chars;
 use itertools::Itertools;
 // tokeniser
 use super::tokens::Token;
-use super::tokens::Operator;
+use super::tokens::TokenOperator;
 
 pub fn scan(input: String) -> Vec<Token> {
 
@@ -16,12 +16,12 @@ pub fn scan(input: String) -> Vec<Token> {
         match c {
             '(' => tokens.push(Token::OpenPar),
             ')' => tokens.push(Token::ClosedPar),
-            '+' => tokens.push(Token::Oper(Operator::Plus)),
-            '-' => tokens.push(Token::Oper(Operator::Minus)),
-            '*' => tokens.push(Token::Oper(Operator::Times)),
-            '/' => tokens.push(Token::Oper(Operator::Divide)),
-            '%' => tokens.push(Token::Oper(Operator::Mod)),
-            '|' => tokens.push(Token::Oper(Operator::Abs)),
+            '+' => tokens.push(Token::Oper(TokenOperator::Plus)),
+            '-' => tokens.push(Token::Oper(TokenOperator::Minus)),
+            '*' => tokens.push(Token::Oper(TokenOperator::Times)),
+            '/' => tokens.push(Token::Oper(TokenOperator::Divide)),
+            '%' => tokens.push(Token::Oper(TokenOperator::Mod)),
+            '|' => tokens.push(Token::Oper(TokenOperator::Abs)),
             ' ' | '\n' => (), // ignore whitespace
             '0'..='9' =>tokens.push(Token::IntLiteral(scan_number(c, chars))),
             _ => panic!("invalid character {}", c)

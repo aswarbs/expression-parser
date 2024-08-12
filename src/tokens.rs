@@ -1,31 +1,37 @@
 #[derive(Debug)]
 pub enum Token {
     IntLiteral(i32),
-    Oper(Operator),
+    Oper(TokenOperator),
     OpenPar,
     ClosedPar
 }
 
 #[derive(Debug)]
-pub enum Operator {
+pub enum TokenOperator {
     Plus,
     Minus,
     Times,
     Divide,
     Mod,
     Abs,
-}
-
-
-#[derive(Debug)]
-pub enum UnOperator {
     Negation,
-    Abs
 }
 
 #[derive(Debug)]
 pub enum Expr {
     LitInteger(i32),
-    BinOp(Operator, Box<Expr>, Box<Expr>),
-    UnOp(UnOperator, Box<Expr>)
+    BinOp(TokenOperator, Box<Expr>, Box<Expr>),
+    UnOp(TokenOperator, Box<Expr>)
+}
+
+#[derive(Debug)]
+pub enum TAMInst {
+    LOADL(i32),
+    ADD,
+    SUB,
+    MUL,
+    DIV,
+    NEG,
+    MOD,
+    ABS
 }
