@@ -1,6 +1,6 @@
 use crate::tokens::{Expr};
 use crate::tokens::Expr::UnOp;
-use crate::tokens::TokenOperator::{Abs, And, Divide, Equal, GreaterThan, LessThan, Minus, Mod, Negation, Not, Or, Plus, Times};
+use crate::tokens::TokenOperator::{Abs, And, Divide, Equal, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual, Minus, Mod, Negation, Not, Or, Plus, Times, NotEqual};
 use super::tokens::Token;
 
 
@@ -32,13 +32,25 @@ pub fn parse_exp(tokens: &mut Vec<Token>) -> Result<Expr,String> {
             tokens.remove(0); // pop /
             Ok(Expr::BinOp(LessThan, Box::from(node), Box::from(parse_exp(tokens)?)))
         }
+        Some(Token::Oper(LessThanOrEqual)) => {
+            tokens.remove(0); // pop /
+            Ok(Expr::BinOp(LessThanOrEqual, Box::from(node), Box::from(parse_exp(tokens)?)))
+        }
         Some(Token::Oper(GreaterThan)) => {
             tokens.remove(0); // pop /
             Ok(Expr::BinOp(GreaterThan, Box::from(node), Box::from(parse_exp(tokens)?)))
         }
+        Some(Token::Oper(GreaterThanOrEqual)) => {
+            tokens.remove(0); // pop /
+            Ok(Expr::BinOp(GreaterThanOrEqual, Box::from(node), Box::from(parse_exp(tokens)?)))
+        }
         Some(Token::Oper(Equal)) => {
             tokens.remove(0); // pop /
             Ok(Expr::BinOp(Equal, Box::from(node), Box::from(parse_exp(tokens)?)))
+        }
+        Some(Token::Oper(NotEqual)) => {
+            tokens.remove(0); // pop /
+            Ok(Expr::BinOp(NotEqual, Box::from(node), Box::from(parse_exp(tokens)?)))
         }
         _ => Ok(node)
     }

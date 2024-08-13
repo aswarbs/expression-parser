@@ -19,8 +19,11 @@ pub enum TokenOperator {
     And,
     Not,
     LessThan,
+    LessThanOrEqual,
     GreaterThan,
+    GreaterThanOrEqual,
     Equal,
+    NotEqual,
 }
 
 #[derive(Debug)]

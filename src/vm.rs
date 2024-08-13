@@ -48,7 +48,7 @@ fn execute(stack: &mut Vec<i32>, instruction: TAMInst) -> Result<&mut Vec<i32>, 
         }
         TAMInst::NOT => {
             let x = stack.pop().ok_or("Missing stack value")?;
-            stack.push(!x);
+            if x==0 {stack.push(1)} else {stack.push(0)}
         }
         TAMInst::GTR => {
             let x = stack.pop().ok_or("Missing stack value")?;

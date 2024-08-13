@@ -16,7 +16,7 @@ use crate::vm::exec_tam;
 fn main() -> Result<(), String> {
 
 
-    let line = "0 = 1".to_string();
+    let line = "1 != 1".to_string();
 
     let mut tokens = scan(line)?;
 
