@@ -15,6 +15,12 @@ pub enum TokenOperator {
     Mod,
     Abs,
     Negation,
+    Or,
+    And,
+    Not,
+    LessThan,
+    GreaterThan,
+    Equal,
 }
 
 #[derive(Debug)]
@@ -33,5 +39,11 @@ pub enum TAMInst {
     DIV,
     NEG,
     MOD,
-    ABS
+    ABS,
+    AND,
+    OR,
+    NOT,
+    GTR,
+    LSS,
+    EQL,
 }

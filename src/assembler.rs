@@ -1,5 +1,5 @@
 use crate::tokens::{Expr, TokenOperator, TAMInst};
-use crate::tokens::TAMInst::{ABS, ADD, DIV, MOD, MUL, NEG, SUB};
+use crate::tokens::TAMInst::{ABS, ADD, AND, DIV, EQL, GTR, LSS, MOD, MUL, NEG, NOT, OR, SUB};
 
 pub fn ast_to_tam(ast: Expr) ->  Vec<TAMInst> {
     match ast {
@@ -18,5 +18,11 @@ fn op_to_taminst(operator: TokenOperator) -> TAMInst {
         TokenOperator::Mod => {MOD}
         TokenOperator::Abs => {ABS}
         TokenOperator::Negation => {NEG}
+        TokenOperator::Or => {OR}
+        TokenOperator::And => {AND}
+        TokenOperator::Not => {NOT}
+        TokenOperator::LessThan => {LSS}
+        TokenOperator::GreaterThan => {GTR}
+        TokenOperator::Equal => {EQL}
     }
 }

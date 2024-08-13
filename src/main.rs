@@ -16,11 +16,9 @@ use crate::vm::exec_tam;
 fn main() -> Result<(), String> {
 
 
-    // my negation has the wrong precedence
+    let line = "0 = 1".to_string();
 
-    let line = "3 * (7 - 5)".to_string();
-
-    let mut tokens = scan(line);
+    let mut tokens = scan(line)?;
 
     println!("{:?}", tokens);
 
