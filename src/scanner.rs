@@ -22,7 +22,11 @@ pub fn scan(input: String) -> Result<Vec<Token>, String> {
             '*' => tokens.push(Token::Oper(TokenOperator::Times)),
             '/' => tokens.push(Token::Oper(TokenOperator::Divide)),
             '%' => tokens.push(Token::Oper(TokenOperator::Mod)),
-            ' ' | '\n' => (), // ignore whitespace
+
+            /*'?' => tokens.push(Token::Oper(TokenOperator::Conditional)),
+            ':' => tokens.push(Token::Oper(TokenOperator::Then)),*/
+
+            ' ' | '\n' | '\r' => (), // ignore whitespace
             '0'..='9' => tokens.push(Token::IntLiteral(scan_number(c, chars))),
 
             // DOUBLE CHAR SYMBOLS

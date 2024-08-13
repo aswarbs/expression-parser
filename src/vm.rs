@@ -1,6 +1,6 @@
 use crate::tokens::TAMInst;
 
-fn execute(stack: &mut Vec<i32>, instruction: TAMInst) -> Result<&mut Vec<i32>, String> {
+fn execute(stack: &mut Vec<i32>, instruction: TAMInst, trace:bool) -> Result<&mut Vec<i32>, String> {
     match instruction {
         TAMInst::LOADL(value) => { stack.push(value); }
         TAMInst::ADD => {
@@ -66,14 +66,14 @@ fn execute(stack: &mut Vec<i32>, instruction: TAMInst) -> Result<&mut Vec<i32>, 
             stack.push(i32::from(y == x));}
     }
 
-    println!("{:?}          {:?}", instruction, stack);
+    if trace {println!("{:?}          {:?}", instruction, stack);}
 
     Ok(stack)
 }
 
-pub fn exec_tam(stack: &mut Vec<i32>, instructions: Vec<TAMInst>) -> Result<&mut Vec<i32>, String> {
-    println!("instruction || stack");
+pub fn exec_tam(stack: &mut Vec<i32>, instructions: Vec<TAMInst>, trace:bool) -> Result<&mut Vec<i32>, String> {
+    if trace {println!("instruction || stack");}
     instructions
         .into_iter()
-        .try_fold(stack, |s, instr| { execute(s,instr) })
+        .try_fold(stack, |s, instr| { execute(s,instr,trace) })
 }

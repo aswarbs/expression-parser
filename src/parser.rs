@@ -61,6 +61,8 @@ pub fn parse_exp(tokens: &mut Vec<Token>) -> Result<Expr,String> {
 fn parse_mexp(tokens:&mut Vec<Token>) -> Result<Expr,String> {
     // mexp ::= term | term * mexp | term / mexp | term && mexp
 
+    // | term ? mexp : mexp
+
     let node = parse_term(tokens)?; // always starts with a term
 
     match tokens.first() {
@@ -77,6 +79,7 @@ fn parse_mexp(tokens:&mut Vec<Token>) -> Result<Expr,String> {
             Ok(Expr::BinOp(And, Box::from(node), Box::from(parse_mexp(tokens)?)))
         },
         _ => Ok(node)
+
     }
 
 }
@@ -114,6 +117,3 @@ fn parse_term(tokens:&mut Vec<Token>) -> Result<Expr, String> {
 
     }
 }
-
-
-

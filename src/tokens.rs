@@ -1,3 +1,5 @@
+use std::fmt;
+
 #[derive(Debug)]
 pub enum Token {
     IntLiteral(i32),
@@ -24,6 +26,9 @@ pub enum TokenOperator {
     GreaterThanOrEqual,
     Equal,
     NotEqual,
+
+    //Conditional,
+    //Then,
 }
 
 #[derive(Debug)]
@@ -49,4 +54,25 @@ pub enum TAMInst {
     GTR,
     LSS,
     EQL,
+}
+
+impl fmt::Display for TAMInst {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            TAMInst::LOADL(value) => write!(f, "LOADL {}", value),
+            TAMInst::ADD => write!(f, "ADD"),
+            TAMInst::SUB => write!(f, "SUB"),
+            TAMInst::MUL => write!(f, "MUL"),
+            TAMInst::DIV => write!(f, "DIV"),
+            TAMInst::MOD => write!(f, "MOD"),
+            TAMInst::NEG => write!(f, "NEG"),
+            TAMInst::ABS => write!(f, "ABS"),
+            TAMInst::AND => write!(f, "ADD"),
+            TAMInst::OR => write!(f, "OR"),
+            TAMInst::NOT => write!(f, "NOT"),
+            TAMInst::GTR => write!(f, "GTR"),
+            TAMInst::LSS => write!(f, "LSS"),
+            TAMInst::EQL => write!(f, "EQL"),
+        }
+    }
 }
