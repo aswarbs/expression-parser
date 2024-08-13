@@ -4,8 +4,7 @@ mod evaluator;
 mod tokens;
 mod assembler;
 mod vm;
-
-use scanner::scan;
+use scanner::tokenize_all;
 use parser::parse_exp;
 use crate::assembler::ast_to_tam;
 use crate::vm::exec_tam;
@@ -47,7 +46,7 @@ fn main() -> Result<(), String> {
 
 fn run_exp(target: &String, expression:String, trace:bool, run:bool) -> Result<String, String> {
 
-    let mut tokens = scan(expression)?;
+    let mut tokens = tokenize_all(expression)?;
     println!("{:?}", tokens);
     let ast = parse_exp(&mut tokens)?;
     println!("ast: {:?}", ast);
