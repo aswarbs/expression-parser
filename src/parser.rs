@@ -1,5 +1,4 @@
-use std::cmp::Ordering::Less;
-use crate::tokens::{Expr, TokenOperator};
+use crate::tokens::{Expr};
 use crate::tokens::Expr::UnOp;
 use crate::tokens::TokenOperator::{Abs, And, Divide, Equal, GreaterThan, LessThan, Minus, Mod, Negation, Not, Or, Plus, Times};
 use super::tokens::Token;
